@@ -1,6 +1,6 @@
-# Genomic Longitudinal Outcomes with Biobank Enrichment (GLOBE)
+# GLOBE
 
-**GLOBE** is a tool (implemented in C/C++) for solving large-scale longitudinal genomic mixed models. It leverages repeated phenotype records over time alongside genetic data, enabling more accurate and interpretable polygenic risk prediction and progression assessment for complex diseases. Iterative, memory-efficient strategies are leveraged throughout, ensuring that biobank-scale analyses remain computationally feasible.
+**G**enomic **L**ongitudinal **O**utcomes with **B**iobank **E**nrichment (**GLOBE**) is a tool (implemented in C/C++) for solving large-scale longitudinal genomic mixed models. It leverages repeated phenotype records over time alongside genetic data, enabling more accurate and interpretable polygenic risk prediction and progression assessment for complex diseases. Iterative, memory-efficient strategies are leveraged throughout, ensuring that biobank-scale analyses remain computationally feasible.
 
 ## Key Features
 - Efficient iterative solver for Mixed Model Equations (MMEs) and variance component estimation (AIREML).
@@ -30,6 +30,7 @@
 ## Executables
 After compiling, two main executables are created in the `build/` directory:
 
+
 ### 1. **runPCGsolver**
 
 *Purpose:* Fits a longitudinal genomic mixed model (LGMM) using user-specified variance components.
@@ -43,6 +44,15 @@ After compiling, two main executables are created in the `build/` directory:
     [--geno <plinkPrefix> | --grm <grmPrefix>] \
     [--debug] [--minMAF <val>] [--maxMissingRate <val>]
 ```
+**Usage:**
+ ```bash
+ ./build/runPCGsolver \
+     --input <file> \
+     --output <prefix> \
+     --sig2e <val> --sig2g <val> --sig2b0 <val> --sigb01 <val> --sig2b1 <val> \
+     [--geno <plinkPrefix> | --grm <grmPrefix>] \
+     [--debug] [--minMAF <val>] [--maxMissingRate <val>]
+ ```
 
 *Example:*
 ```bash 
@@ -52,6 +62,15 @@ After compiling, two main executables are created in the `build/` directory:
     --geno /path/to/myPlinkFile \
     --sig2e 0.6 --sig2g 0.4 --sig2b0 0.4 --sigb01 0.2 --sig2b1 0.2
 ```
+**Example:**
+ ```bash 
+ ./build/runPCGsolver \
+     --input data.txt \
+     --output results \
+     --geno /path/to/myPlinkFile \
+     --sig2e 0.6 --sig2g 0.4 --sig2b0 0.4 --sigb01 0.2 --sig2b1 0.2
+ ```
+
 
 ### 2. **runAIREML**
 
@@ -64,6 +83,13 @@ After compiling, two main executables are created in the `build/` directory:
     [--maxiter <val>] [--tol <val>] [--numMC <val>] \
     [--sig2e <val>] [--sig2g <val>] [--sig2b0 <val>] [--sigb01 <val>] [--sig2b1 <val>]
 ```
+**Usage:**
+ ```bash
+ ./build/runAIREML \
+     <input_filename> <grm_prefix> <output_prefix> \
+     [--maxiter <val>] [--tol <val>] [--numMC <val>] \
+     [--sig2e <val>] [--sig2g <val>] [--sig2b0 <val>] [--sigb01 <val>] [--sig2b1 <val>]
+ ```
 
 *Example:*
 ```bash 
@@ -73,6 +99,14 @@ After compiling, two main executables are created in the `build/` directory:
     output_results \
     --maxiter 50 --tol 1e-3 --numMC 15
 ```
+**Example:**
+ ```bash 
+ ./build/runAIREML \
+     data.txt \
+     mydata.grm.bin \
+     output_results \
+     --maxiter 50 --tol 1e-3 --numMC 15
+ ```
 
 ## License
 
