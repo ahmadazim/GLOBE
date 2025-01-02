@@ -1,6 +1,6 @@
-# GLOBE
+# Genomic Longitudinal Outcomes with Biobank Enrichment (GLOBE)
 
-**G**enomic **L**ongitudinal **O**utcomes with **B**iobank **E**nrichment (**GLOBE**) is a tool (implemented in C/C++) for solving large-scale longitudinal genomic mixed models. It leverages repeated phenotype records over time alongside genetic data, enabling more accurate and interpretable polygenic risk prediction and progression assessment for complex diseases. Iterative, memory-efficient strategies are leveraged throughout, ensuring that biobank-scale analyses remain computationally feasible.
+**GLOBE** is a tool (implemented in C/C++) for solving large-scale longitudinal genomic mixed models. It leverages repeated phenotype records over time alongside genetic data, enabling more accurate and interpretable polygenic risk prediction and progression assessment for complex diseases. Iterative, memory-efficient strategies are leveraged throughout, ensuring that biobank-scale analyses remain computationally feasible.
 
 ## Key Features
 - Efficient iterative solver for Mixed Model Equations (MMEs) and variance component estimation (AIREML).
