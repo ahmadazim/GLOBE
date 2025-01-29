@@ -68,6 +68,12 @@ add_executable(runAIREML
 )
 target_link_libraries(runAIREML PRIVATE GLOBE_LIB)
 
+# Executable #3: runAIREML_reducedModel 
+add_executable(runAIREML_reducedModel
+    src/varCompEst_reducedModel_noTime.cpp
+)
+target_link_libraries(runAIREML_reducedModel PRIVATE GLOBE_LIB)
+
 # (Optional) Testing
 # enable_testing()
 # add_executable(test_solver tests/test_solver.cpp)
