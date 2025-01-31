@@ -5,6 +5,12 @@ project(GLOBE VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+endif()
+
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -g -fopenmp")
+
 set(NLOPT_ROOT "${CMAKE_SOURCE_DIR}/thirdParty/nlopt")
 set(EIGEN_ROOT "${CMAKE_SOURCE_DIR}/thirdParty/eigen")
 
@@ -24,25 +30,6 @@ if(OpenMP_CXX_FOUND)
     message(STATUS "Found OpenMP!")
 endif()
 
-# set(MKL_ROOT "$ENV{MKLROOT}")
-# if(NOT MKL_ROOT)
-#     message(WARNING "MKLROOT is not set. Please set MKL_ROOT or MKLROOT environment variable.")
-# endif()
-
-# if(EXISTS "${MKL_ROOT}/lib/intel64")
-#     link_directories("${MKL_ROOT}/lib/intel64")
-# endif()
-
-# set(MKL_LIBS
-#     mkl_intel_lp64
-#     mkl_gnu_thread
-#     mkl_core
-#     pthread
-#     m
-#     dl
-# )
-
-# Build a static library from shared code only (no main)
 add_library(GLOBE_LIB STATIC
     src/utils.cpp
 )
@@ -51,18 +38,15 @@ if(OpenMP_CXX_FOUND)
     target_link_libraries(GLOBE_LIB PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
-target_link_libraries(GLOBE_LIB PRIVATE
-    nlopt
-    # ${MKL_LIBS}
-)
+target_link_libraries(GLOBE_LIB PRIVATE nlopt)
 
-# Executable #1: runPCGsolver (has main() in PCGsolver.cpp)
+# Executable #1: runPCGsolver
 add_executable(runPCGsolver
     src/PCGsolver.cpp
 )
 target_link_libraries(runPCGsolver PRIVATE GLOBE_LIB)
 
-# Executable #2: runAIREML (has main() in runAIREML.cpp)
+# Executable #2: runAIREML
 add_executable(runAIREML
     src/varCompEst.cpp
 )

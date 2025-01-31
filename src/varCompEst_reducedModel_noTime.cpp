@@ -1,14 +1,19 @@
+#include "utils.hpp" 
 #include <iostream>
+#include <chrono>
+#include <cstdlib>
 #include <fstream>
-#include <sstream>
 #include <vector>
-#include <cmath>
+#include <Eigen/Dense>
+#include <Eigen/Sparse>
+#include <unordered_map>
+#include <omp.h>
 #include <cassert>
+#include <cmath>
 #include <unordered_set>
 #include <random>
-#include <chrono>
+#include <streambuf>
 
-#include <Eigen/Dense>
 #include <nlopt.hpp>
 
 // Global constants
