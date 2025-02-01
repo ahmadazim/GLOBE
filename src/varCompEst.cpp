@@ -1179,7 +1179,8 @@ void oneIter_AIREML(VectorXf& theta_prev, VarCompDataStruct& VarCompData,
 
     std::vector<PositivityConstraintData> positivity_constraint_data(n);
     for (unsigned i = 0; i < n; ++i) {
-        positivity_constraint_data[i].idx = i;
+        if (i == 3) continue; // allow covariance component to be negative
+	positivity_constraint_data[i].idx = i;
         positivity_constraint_data[i].theta_prev = &theta_prev;
         opt.add_inequality_constraint(positivity_constraint_vfunc, &positivity_constraint_data[i], 1e-10);
     }
@@ -1236,7 +1237,7 @@ void oneIter_AIREML(VectorXf& theta_prev, VarCompDataStruct& VarCompData,
         // Check constraints on theta_new
         bool constraints_violated = false;
         for (unsigned i = 0; i < n; ++i) {
-            if (theta_new(i) < 1e-6) {
+            if (i != 3 && theta_new(i) < 1e-6) {
                 std::cout << "Warning: Negative variance component detected. Clipping." << std::endl;
                 theta_new(i) = 1e-6f;
                 constraints_violated = true;
